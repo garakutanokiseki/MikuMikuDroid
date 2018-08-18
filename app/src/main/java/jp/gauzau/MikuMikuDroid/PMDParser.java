@@ -1,5 +1,7 @@
 package jp.gauzau.MikuMikuDroid;
 
+import android.util.Log;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -8,8 +10,6 @@ import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.nio.ShortBuffer;
 import java.util.ArrayList;
-
-import android.util.Log;
 
 public class PMDParser extends ParserBase implements ModelFile {
 	private String  mFileName;
@@ -384,7 +384,7 @@ public class PMDParser extends ParserBase implements ModelFile {
 				bone.matrix = new float[16]; // for skin-mesh animation
 				bone.matrix_current = new float[16]; // for temporary (current bone matrix that is not include parent rotation
 				bone.updated = false; // whether matrix is updated by VMD or not
-				bone.is_leg = bone.name.contains("Ç–Ç¥");
+				bone.is_leg = bone.name.contains("„Å≤„Åñ");
 				
 				if (bone.tail != -1) {
 					mBone.add(i, bone);

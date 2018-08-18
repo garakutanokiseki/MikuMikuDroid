@@ -1,9 +1,5 @@
 package jp.gauzau.MikuMikuDroid;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -21,12 +17,17 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Toast;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class MikuMikuDroid extends Activity implements SensorEventListener {
 	// View
@@ -49,7 +50,8 @@ public class MikuMikuDroid extends Activity implements SensorEventListener {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+		requestWindowFeature(Window.FEATURE_ACTION_BAR);
+
 //		mSM = (SensorManager)getSystemService(SENSOR_SERVICE);
 //		mAx = mSM.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 //		mMg = mSM.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);

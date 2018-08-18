@@ -1,13 +1,13 @@
 package jp.gauzau.MikuMikuDroid;
 
+import android.util.Log;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
-
-import android.util.Log;
 
 public class XParser extends ParserBase {
 	private String  mFileName;
@@ -122,7 +122,7 @@ public class XParser extends ParserBase {
 		createVertBuffer(mMb);
 		createIndexBuffer(mMb);
 		
-		setDummyBone("ÉZÉìÉ^Å[");
+		setDummyBone("„Çª„É≥„Çø„Éº");
 		
 		mToonFileName = new ArrayList<String>(11);
 		mToonFileName.add(0, base + "Data/toon0.bmp");

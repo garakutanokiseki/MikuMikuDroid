@@ -1,5 +1,17 @@
 package jp.gauzau.MikuMikuDroid;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.media.MediaPlayer;
+import android.net.Uri;
+import android.opengl.Matrix;
+import android.os.Build;
+import android.os.Environment;
+import android.os.PowerManager;
+import android.os.PowerManager.WakeLock;
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,18 +23,8 @@ import java.io.ObjectOutputStream;
 import java.io.StringWriter;
 import java.util.ArrayList;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-import android.media.MediaPlayer;
-import android.net.Uri;
-import android.opengl.Matrix;
-import android.os.Build;
-import android.os.PowerManager;
-import android.os.PowerManager.WakeLock;
-import android.util.Log;
-
 public class CoreLogic {
+    private final String TAG = "CoreLogic";
 	// model / music data
 	private ArrayList<Miku>		mMiku;
 	private String				mBG;
@@ -171,12 +173,15 @@ public class CoreLogic {
 		if(isArm()) {
 			btMakeWorld();
 		}
-		
+
+		/*
 		if(new File("/sdcard/.MikuMikuDroid").exists()) {
 			mBase = "/sdcard/.MikuMikuDroid/";
 		} else {
 			mBase = "/sdcard/MikuMikuDroid/";			
 		}
+		*/
+		mBase = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS) + "/MikuMikuDroid/";
 	}
 	
 	public void setGLConfig(int max_bone) {
@@ -688,6 +693,7 @@ public class CoreLogic {
 	}
 	
 	public boolean checkFileIsPrepared() {
+		Log.v("CoreLogic", "checkFileIsPrepared : mBase = " + mBase);
 		File files = new File(mBase + "Data/toon0.bmp");
 		return files.exists();
 	}
@@ -754,6 +760,8 @@ public class CoreLogic {
 	}
 	
 	private ArrayList<File> listRecursive1(File file, String[] ext) {
+	    Log.v(TAG, String.format("listRecursive1 file=%s, ext=%s",file.getAbsolutePath(), ext));
+
 		ArrayList<File> files = new ArrayList<File>();
 		if(file.exists()) {
 			if(file.isFile()) {
@@ -765,9 +773,11 @@ public class CoreLogic {
 				}
 			} else {
 				File[] list = file.listFiles();
-				for(int i = 0; i < list.length; i++) {
-					files.addAll(listRecursive1(list[i], ext));
-				}
+				if(list != null){
+                    for(int i = 0; i < list.length; i++) {
+                        files.addAll(listRecursive1(list[i], ext));
+                    }
+                }
 			}
 		}
 		
