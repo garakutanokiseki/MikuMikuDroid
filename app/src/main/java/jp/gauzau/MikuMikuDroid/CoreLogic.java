@@ -812,7 +812,7 @@ public class CoreLogic {
 	}
 	
 	static boolean isArm() {
-		return Build.CPU_ABI.contains("armeabi");
+		return Build.CPU_ABI.contains("armeabi") | Build.CPU_ABI.contains("arm64-v8a") | Build.CPU_ABI.contains("armeabi-v7a");
 	}
 	
 	// ///////////////////////////////////////////////////////////

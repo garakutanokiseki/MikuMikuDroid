@@ -63,8 +63,10 @@ public class PMDParser extends ParserBase implements ModelFile {
 				if (!isEof()) {
 					parsePMDEnglish();
 					parsePMDToonFileName(path, base);
-					parsePMDRigidBody();
-					parsePMDJoint();
+					if (!isEof()) {
+		  				parsePMDRigidBody();
+						parsePMDJoint();
+					}
 				} else {
 					mToonFileName = new ArrayList<String>(11);
 					mToonFileName.add(0, base + "Data/toon0.bmp");
@@ -153,8 +155,12 @@ public class PMDParser extends ParserBase implements ModelFile {
 		if (mHasEnglishName == 1) {
 			parsePMDEnglishName();
 			parsePMDEnglishBoneList();
-			parsePMDEnglishSkinList();
-			parsePMDEnglishBoneDispName();
+			if (mSkinDisp != null) {
+				parsePMDEnglishSkinList();
+			}
+			if (mBoneDispName != null) {
+				parsePMDEnglishBoneDispName();
+		}
 		}
 
 	}
